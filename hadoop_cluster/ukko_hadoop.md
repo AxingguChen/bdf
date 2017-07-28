@@ -19,26 +19,36 @@ we choose ukko026 be the namenode, ukko027, ukko028 and ukko029 be the datanodes
 
 ###PART A: On your namenode
 1. Use your SSH software to login to your namenode. Navigate to /cs/work/scratch/ folder. Make you own working directory here (NB: in case you don't have folder under /cs/work/home/).
-2. Download and extract Hadoop 2.7.3 binary distribution to your working directory. Change your current directory to your_working_dir/hadoop-2.7.3/:
+2. Download and extract Hadoop 2.7.3 binary distribution to your working directory. Change your current directory to your_working_dir/hadoop-2.7.3/: 
+
+    
     $ wget [http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz](http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz)
     $ tar xvf hadoop-2.7.3.tar.gz
-    $ cd hadoop-2.7.3
+    $ cd hadoop-2.7.3  
 3. Add $JAVA_HOME environment variable. Add the following three lines to the beginning of etc/hadoop/hadoop-env.sh:
+
+
     export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
     export PATH=${JAVA_HOME}/bin:${PATH}
     export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 4. Modify etc/hadoop/core-site.xml, put the following lines between <configuration> and </configuration>:
+
+
     <property>
         <name>fs.default.name</name>
         <value>hdfs://ukko026.hpc.cs.helsinki.fi:9000</value>
     </property>
 You need to change the underlined hostname matches your choice of namenode. The port number 9000 is usually not necessarily being changed, unless it is occupied by someone else.
 5. Modify etc/hadoop/mapred-site.xml, put the following lines between <configuration> and </configuration>:
+
+
     <property>
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
 6. Modify etc/hadoop/yarn-site.xml, put the following lines between <configuration> and </configuration>:
+ 
+ 
     <property>
         <name>yarn.resourcemanager.hostname</name>
         <value>ukko026.hpc.cs.helsinki.fi</value>
@@ -52,8 +62,15 @@ You need to change the underlined hostname matches your choice of namenode. The 
         <value>org.apache.hadoop.mapred.ShuffleHandler</value>
     </property>
 You need to change the underlined hostname matches your choice of namenode.
-7. Format the namenode by using ./bin/hadoop namenode –format command. This is only required once, so you don’t need to format it every time you run Hadoop.
-8. Start Hadoop on the namenode by using ./sbin/hadoop-daemon.sh start namenode.
+7. Format the namenode by using command.
+
+        $ ./bin/hadoop namenode –format  
+        
+This is only required once, so you don’t need to format it every time you run Hadoop.
+8. Start Hadoop on the namenode by using 
+
+        $ ./sbin/hadoop-daemon.sh
+start namenode.
 9. Check the log logs/hadoop-your_username-namenode-ukko026.log to see if the namenode is up. The last two lines should be
     Starting services required for active state
     Starting CacheReplicationMonitor with interval 30000 milliseconds
@@ -64,18 +81,26 @@ You need to change the underlined hostname matches your choice of namenode.
 13. Open your web browser and navigate to [http://ukko026.hpc.cs.helsinki.fi:8088/](http://ukko026.hpc.cs.helsinki.fi:8088/) (replace ukko026 with the name of your namenode).
 
 ###PART B: On your datanodes
-1. Navigate to your working directory and start Hadoop by using ./sbin/hadoop-daemon.sh start datanode. If everything goes smoothly, you will able to find this node after refreshing the webpage in Step A.7.
+1. Navigate to your working directory and start Hadoop by using 
+
+        $ ./sbin/hadoop-daemon.sh start datanode
+If everything goes smoothly, you will able to find this node after refreshing the webpage in Step A.7.
 2. The namenode can also be a datanode. Simply do Step B.1 on your namenode.
-3. Start the YARN Node Manager by using ./sbin/yarn-daemon.sh start nodemanager. If everything goes smoothly, you will able to find this node after refreshing the webpage in Step A.11, Cluster -> Nodes.
+3. Start the YARN Node Manager by using 
+
+        $ ./sbin/yarn-daemon.sh start nodemanager
+If everything goes smoothly, you will able to find this node after refreshing the webpage in Step A.11, Cluster -> Nodes.
 4. The namenode can also be a slave node. Simply do Step B.3 on your namenode.
 
 ###Part C: Stop Hadoop when you done
 1. Stop your namenode:
-    ./sbin/hadoop-daemon.sh stop namenode
-    ./sbin/yarn-daemon.sh stop resourcemanager
+
+       $ ./sbin/hadoop-daemon.sh stop namenode
+       $ ./sbin/yarn-daemon.sh stop resourcemanager
 2. Stop your datanodes:
-    ./sbin/hadoop-daemon.sh stop datanode
-    ./sbin/yarn-daemon.sh stop nodemanager
+
+       $ ./sbin/hadoop-daemon.sh stop datanode
+       $ ./sbin/yarn-daemon.sh stop nodemanager
 
 ###Part D: Try out WordCount example
 1. Generate wc.jar on your local computer. The source code is available at
@@ -83,14 +108,18 @@ You need to change the underlined hostname matches your choice of namenode.
 2. Upload wc.jar (with your SFTP client) to your Hadoop working directory on Ukko.
 3. Create input folder and two files:
 $ mkdir /input
-    $ cat Hello World Bye World > /input/file01
-    $ cat Hello Hadoop Bye Hadoop > /input/file02
+
+        $ cat Hello World Bye World > /input/file01
+        $ cat Hello Hadoop Bye Hadoop > /input/file02
 4. … then put “input” folder into HDFS (on your namenode):
-    $ ./bin/hadoop fs –put input /
+
+        $ ./bin/hadoop fs –put input /
 5. … Run wc.jar (on your namenode):
-    $ ./bin/hadoop jar wc.jar WordCount /input /output
+ 
+       $ ./bin/hadoop jar wc.jar WordCount /input /output
 6. Show result:
-    $ ./bin/hadoop fs –cat /output/part-r-00000
+ 
+       $ ./bin/hadoop fs –cat /output/part-r-00000
 
 ###Additional instructions
 1. The jps command is a shortcut for checking the status of individual service, instead of reading logs. Bear in mind however that it only indicates the process has been started, not running correctly. Always check the log when something is not working as expected.
@@ -99,11 +128,15 @@ $ mkdir /input
 4. ./bin/hadoop fs –rm –r -f /output command will delete “/output” folder in HDFS. NB: Double-check your input before pressing ENTER!
 5. More HDFS command is available at [https://hadoop.apache.org/docs/stable/hadoop-projectdist/hadoop-common/FileSystemShell.html](https://hadoop.apache.org/docs/stable/hadoop-projectdist/hadoop-common/FileSystemShell.html).
 6. If you choose more than 3 datanodes, you may want to change the number of data replication of HDFS. This can be done by adding the following configuration to etc/hadoop/hdfssite.xml:
+
+
     <property>
         <name>dfs.replication</name>
         <value>10</value>
     </property>
 7. The default split for input file is 128MB. You may alter it by adding the following configuration to etc/hadoop/hdfs-site.xml (33554432 = 32MB):
+
+
     <property>
         <name> dfs.blocksize</name>
         <value>33554432</value>
