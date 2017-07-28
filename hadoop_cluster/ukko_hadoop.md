@@ -20,17 +20,15 @@ we choose ukko026 be the namenode, ukko027, ukko028 and ukko029 be the datanodes
 ###PART A: On your namenode
 1. Use your SSH software to login to your namenode. Navigate to /cs/work/scratch/ folder. Make you own working directory here (NB: in case you don't have folder under /cs/work/home/).
 2. Download and extract Hadoop 2.7.3 binary distribution to your working directory. Change your current directory to your_working_dir/hadoop-2.7.3/: 
-
-    
-    $ wget [http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz](http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz)
-    $ tar xvf hadoop-2.7.3.tar.gz
-    $ cd hadoop-2.7.3  
+ 
+        $ wget [http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz](http://mirror.netinch.com/pub/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz)
+        $ tar xvf hadoop-2.7.3.tar.gz
+        $ cd hadoop-2.7.3  
 3. Add $JAVA_HOME environment variable. Add the following three lines to the beginning of etc/hadoop/hadoop-env.sh:
 
-
-    export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-    export PATH=${JAVA_HOME}/bin:${PATH}
-    export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
+        export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+        export PATH=${JAVA_HOME}/bin:${PATH}
+        export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 4. Modify etc/hadoop/core-site.xml, put the following lines between <configuration> and </configuration>:
 
 
