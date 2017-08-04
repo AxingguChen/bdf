@@ -44,7 +44,7 @@ You need to change the underlined hostname matches your choice of namenode. The 
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
-6. Modify etc/hadoop/yarn-site.xml, put the following lines between <configuration> and </configuration>:
+6. Modify etc/hadoop/yarn-site.xml, put the following lines between <configuration> and </configuration>: 
  
  
     <property>
