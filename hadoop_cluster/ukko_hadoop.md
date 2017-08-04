@@ -47,18 +47,18 @@ You need to change the underlined hostname matches your choice of namenode. The 
 6. Modify etc/hadoop/yarn-site.xml, put the following lines between <configuration> and </configuration>: 
  
  
-    <property>
-        <name>yarn.resourcemanager.hostname</name>
-        <value>ukko026.hpc.cs.helsinki.fi</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.aux-services</name>
-        <value>mapreduce_shuffle</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
-        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
-    </property>
+        <property>
+            <name>yarn.resourcemanager.hostname</name>
+            <value>ukko026.hpc.cs.helsinki.fi</value>
+        </property>
+        <property>
+            <name>yarn.nodemanager.aux-services</name>
+            <value>mapreduce_shuffle</value>
+        </property>
+        <property>
+            <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+            <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+        </property>
 You need to change the underlined hostname matches your choice of namenode.
 7. Format the namenode by using command.
 
