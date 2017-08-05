@@ -27,5 +27,6 @@ In the same fashion, you can access the MapReduce  Job Monitoring page.
 
     $chromium-browser http://ukkoserver:8088
     e.g http://ukko144.hpc.cs.helsinki.fi:8088
+    
 
 
