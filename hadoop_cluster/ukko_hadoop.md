@@ -1,5 +1,7 @@
 #How-to: Setup a multi-node Hadoop cluster on Ukko
 
+orignially from https://www.cs.helsinki.fi/u/pengxu/ukko.pdf
+
 ##Prerequisites
 1. Before you start, please read Ukko instructions carefully: [https://www.cs.helsinki.fi/en/compfac/highperformance-cluster-ukko](https://www.cs.helsinki.fi/en/compfac/highperformance-cluster-ukko)
 
