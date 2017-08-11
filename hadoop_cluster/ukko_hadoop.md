@@ -171,3 +171,19 @@ $ mkdir /input
 
 8. Hadoop use only one reducer by default (to verify this, see the number of “part-***” files in the output directory or use YARN console webpage).
 If you find that the reduce stage is too slow or simply run out of memory (java.lang.OutOfMemoryError), you may try to change it by adding e.g. job.setNumReduceTasks(64); to your source code. NB: The final output will also be distributed when you use more than one reducer. You may need to combine them.
+
+9. If you have problems on HDFS disk capacity limitation, point the datanode directory to your folder instead of tmp one:
+
+
+     <property>
+         <name>dfs.datanode.data.dir</name>
+         <value>file:///cs/home/youIDinUkko/tmp/${hostname}</value>
+      </property>
+      
+10. If you have problems on Yarn disk capacity limtation (normally unhealthy node error), point the nodemanager directory to your folder instead of tmp one:
+
+
+    <property>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>/cs/home/youIDinUkko/nm-local-dir/${hostname}/</value>
+    </property>
