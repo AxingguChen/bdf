@@ -6,8 +6,19 @@ https://spark.apache.org/downloads.html
 
 Current stable version : Spark 2.1.1 (release on 2 May 2017)
 
-    $tar xvzf  spark-2.1.1-bin-hadoop2.7.tgz
-    
+        $tar xvzf  spark-2.1.1-bin-hadoop2.7.tgz
+   
+Run a toy example:
+
+        $./bin/run-example SparkPi 10
+       
+Run shell:
+        
+        #Scala
+        $./bin/spark-shell --master local[2]
+        #Python
+        $./bin/pyspark --master local[2]
+
 **Spark on yarn**
 History server:
 
@@ -28,7 +39,7 @@ Spark on yarn:
 Spark submit (toy case on 2.1.1):
 
 
-        ./bin/spark-submit --class org.apache.spark.examples.SparkPi \
+        $./bin/spark-submit --class org.apache.spark.examples.SparkPi \
             --master yarn \
             --deploy-mode cluster \
             --driver-memory 2g \
@@ -41,7 +52,7 @@ Spark submit (toy case on 2.1.1):
 Spark kmeans example from me:
 
 
-        ./bin/spark-submit  
+        $./bin/spark-submit  
             --class com.intel.hibench.sparkbench.ml.DenseKMeans 
             --master yarn-client 
             --num-executors 6 
