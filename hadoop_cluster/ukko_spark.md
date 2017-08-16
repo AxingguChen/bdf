@@ -1,7 +1,7 @@
-**Apache Hive Installation.**
+**Apache Spark Installation.**
 
 **Download and extract**
-Download stable version of Hive. 
+Download stable version of spark. 
 https://spark.apache.org/downloads.html
 
 Current stable version : Spark 2.1.1 (release on 2 May 2017)
