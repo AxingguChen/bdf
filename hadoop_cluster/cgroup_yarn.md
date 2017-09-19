@@ -19,13 +19,13 @@ It also require that the privilege of *container-executor.cfg* is needed to be o
 
 Using *cmake -DHADOOP_CONF_DIR=/etc/hadoop* to *recompile container-executor*, so that the path change to */etc/hadoop*
 
-    cd /yuxingch
-    tar -zxf hadoop-2.7.4-src.tar.gz
-    cd /yuxingch/hadoop-2.7.4-srchadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/
-    cmake src -DHADOOP_CONF_DIR=/etc/hadoop
-    make
-    cd targe/usr/local/bin/
-    cp container-executor /etc/hadoop/container-executor
+        cd /yuxingch
+        tar -zxf hadoop-2.7.4-src.tar.gz
+        cd /yuxingch/hadoop-2.7.4-srchadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/
+        cmake src -DHADOOP_CONF_DIR=/etc/hadoop
+        make
+        cd targe/usr/local/bin/
+        cp container-executor /etc/hadoop/container-executor
 Note: *container-executor* file is owned by root and belongs to the same group of your executing users.
 
 2. preparation for *container-executor.cfg* file:
