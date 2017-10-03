@@ -39,7 +39,7 @@ Note: *container-executor* file is owned by root and belongs to the same group o
 
 Check if the configuration is correct or not:
     
-        $./bin/container-executor --checksetup
+        $ ./bin/container-executor --checksetup
 Note: *container-executor.cfg* file is owned by root and belongs to the same group of your executing users from root directory to current directory.
         
 **CGroups configuration:** 
@@ -72,10 +72,11 @@ Where the LCE should attempt to mount cgroups if not found:
     
 Below is how I configure this folder:
     
-    #drwxrwxrwx  3 root     root
-    $mkdir /cgroup 
-    #drwxr-xr-x  3 yuxingch hyad-all
-    $mkdir /cgroup/cpu
+    $ mkdir /cgroup 
+    $ mkdir /cgroup/cpu
+    $ sudo chmod 777 /cgroup
+    $ sudo chmod 755 /cgroup/cpu
+    $ sudo chown yuxingch:hyad-all /cgroup/cpu
 
 Weather we should limit users or not when nonsecure mode is on:
 
