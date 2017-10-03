@@ -13,33 +13,35 @@ before you go deeper the configuration, you need *sudo* privilege to move on.
 
 1. preparation for *container-executor* file:
 
-        chown root:hyad-all bin/container-executor
-        chmod 6050 bin/container-executor
+
+    chown root:hyad-all bin/container-executor
+    chmod 6050 bin/container-executor
 It also require that the privilege of *container-executor.cfg* is needed to be owned by root from root directory to current one. The default path is *${HADOOP_HOME}/etc/hadoop/container-executor.cfg*. If it is somehow not good to change the path of hadoop directory, we can re-compile the *container-executor* file:
 
 Using *cmake -DHADOOP_CONF_DIR=/etc/hadoop* to recompile *container-executor*, so that the path change to */etc/hadoop*
 
-        cd /yuxingch
-        tar -zxf hadoop-2.7.4-src.tar.gz
-        cd /yuxingch/hadoop-2.7.4-srchadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/
-        cmake src -DHADOOP_CONF_DIR=/etc/hadoop
-        make
-        cd targe/usr/local/bin/
-        cp container-executor /etc/hadoop/container-executor
+    cd /yuxingch
+    tar -zxf hadoop-2.7.4-src.tar.gz
+    cd /yuxingch/hadoop-2.7.4-srchadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/
+    cmake src -DHADOOP_CONF_DIR=/etc/hadoop
+    make
+    cd targe/usr/local/bin/
+    cp container-executor /etc/hadoop/container-executor
 Note: *container-executor* file is owned by root and belongs to the same group of your executing users.
 
 2. preparation for *container-executor.cfg* file:
 
-        # because of the extra space left at the end of line of some file format, please delete the comment from original file, otherwise, it may cause the problem of
-        # 'Can't get group information for hyad-all(your group name)  - Success.' or  'Can't get configured value for yarn.nodemanager.linux-container-executor.group.'
-        yarn.nodemanager.linux-container-executor.group=hyad-all    # first group from my $groups 
-        banned.users=root               # your usernames that don't allow to use it
-        min.user.id=1000
-        allowed.system.users=yuxingch   # your usernames that allow to use it
+
+    # because of the extra space left at the end of line of some file format, please delete the comment from original file, otherwise, it may cause the problem of
+    # 'Can't get group information for hyad-all(your group name)  - Success.' or  'Can't get configured value for yarn.nodemanager.linux-container-executor.group.'
+    yarn.nodemanager.linux-container-executor.group=hyad-all    # first group from my $groups 
+    banned.users=root               # your usernames that don't allow to use it
+    min.user.id=1000
+    allowed.system.users=yuxingch   # your usernames that allow to use it
 
 Check if the configuration is correct or not:
     
-        $ ./bin/container-executor --checksetup
+    $ ./bin/container-executor --checksetup
 Note: *container-executor.cfg* file is owned by root and belongs to the same group of your executing users from root directory to current directory.
         
 **CGroups configuration:** 
