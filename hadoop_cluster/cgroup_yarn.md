@@ -17,7 +17,7 @@ before you go deeper the configuration, you need *sudo* privilege to move on.
         chmod 6050 bin/container-executor
 It also require that the privilege of *container-executor.cfg* is needed to be owned by root from root directory to current one. The default path is *${HADOOP_HOME}/etc/hadoop/container-executor.cfg*. If it is somehow not good to change the path of hadoop directory, we can re-compile the *container-executor* file:
 
-Using *cmake -DHADOOP_CONF_DIR=/etc/hadoop* to *recompile container-executor*, so that the path change to */etc/hadoop*
+Using *cmake -DHADOOP_CONF_DIR=/etc/hadoop* to recompile *container-executor*, so that the path change to */etc/hadoop*
 
         cd /yuxingch
         tar -zxf hadoop-2.7.4-src.tar.gz
@@ -69,6 +69,14 @@ Where the LCE should attempt to mount cgroups if not found:
         <name>yarn.nodemanager.linux-container-executor.cgroups.mount-path</name>
         <value>/cgroup</value>
     </property>
+    
+Below is how I configure this folder:
+    
+    #drwxrwxrwx  3 root     root
+    $mkdir /cgroup 
+    #drwxr-xr-x  3 yuxingch hyad-all
+    $mkdir /cgroup/cpu
+
 Weather we should limit users or not when nonsecure mode is on:
 
     <property>
