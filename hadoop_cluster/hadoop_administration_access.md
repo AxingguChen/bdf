@@ -30,3 +30,5 @@ In the same fashion, you can access the MapReduce  Job Monitoring page.
     
 
 
+OR, must simpler way use the VDI environment 
+see the link https://helpdesk.it.helsinki.fi/en/news/remote-desktop-university-staff-and-students for instruction.
